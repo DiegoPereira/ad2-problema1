@@ -1,0 +1,30 @@
+---
+title: "AD2-Problema1"
+author: "Diego de Lima Pereira"
+date: "Wednesday, October 15, 2014"
+output: html_document
+---
+
+  Este é um relatório referente a primeira atividade da disciplina de Análise de Dados II, da Universidade Federal de Campina Grande, ministrada pelo professor Nazareno Andrade.
+
+  O intuito Geral dessa análise é termos uma ideia do perfil do profissional de TI no Brasil, em relação de algumas variavéis que dispomos.
+  
+  Os dados estão disponíveis aqui.
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r, echo=FALSE}
+summary(cars)
+salarios <- read.csv("C:/Users/diego/Desktop/salarios-ti-regioes.csv")
+summary(salarios$UF)
+```
+
+You can also embed plots, for example:
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
