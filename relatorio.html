@@ -59,21 +59,279 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 
 <p>Este é um relatório referente a primeira atividade da disciplina de Análise de Dados II, da Universidade Federal de Campina Grande, ministrada pelo professor Nazareno Andrade.</p>
-<p>O intuito Geral dessa análise é termos uma ideia do perfil do profissional de TI no Brasil, em relação de algumas vaviavéis que dispomos.</p>
-<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com">http://rmarkdown.rstudio.com</a>.</p>
-<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
+<p>O intuito Geral dessa análise é termos uma ideia do perfil do profissional de TI no Brasil, em relação de algumas variáveis que dispomos.</p>
+<p>Os dados estão disponí­veis <a href="https://sites.google.com/a/computacao.ufcg.edu.br/analise-de-dados-1/problema/salarios-ti-regioes.csv">aqui</a></p>
+<p><strong>1. Visão Geral de Hans Rosling sobre a divisão socioecônomica entre primeiro mundo e terceiro mundo.</strong></p>
+<p>A pergunta que ele se fez inicialmente foi se podíamos dividir o mundo em mundo ocidental e em terceiro mundo. Onde o primeiro tinha vida longa e família pequena, e o segundo famílias grandes e pouca expectativa de vida. A primeira observação mostra que na medida que os países investem mais em saúde a expectativa de vida o comportamento de famílias pequenas e boa expectativa de vida se assemelha ao dos países ricos do ocidente. Daí vem a dúvida do que teria ocasionado isso, e ele começa a perguntar ao dados o motivo disso, primeira informação foi a distribuição de renda. O fato interessante é o crescimento da Ásia e sua gradativa saída do grupo dos mais pobres. Depois o gancho foi relacionar a taxa de mortalidade infantil com o PIB per capita de cada região e podemos observar que mesmo dentro das regiões há grandes diferenças econômicas e socioculturais. Uma boa constatação é que segundo os dados um país saudável se desenvolve mais rapidamente do que um rico. No geral não tive dúvidas sobre o vídeo.</p>
+<p><strong>2. Panorama Geral dos Profissionais de TI</strong></p>
+<p>Os dados são constítuidos dos campos: Cidade, UF, salario bruto, horas diarias, tempo de empresa, experiência profissional, iniciativa, cargo, formacao, pos graduacao ou certificacao e regiao.</p>
+<p>Abaixo podemos encontrar a distribuição de salários em função dos estados, podemos observar logo de imediato que Minas Gerais possui o maior número de empregados na área.</p>
 <pre><code>##    AL BA CE DF ES GO MG MT PA PB PE PJ PR RJ RO RS SC SE SP 
 ##  1  3  9  6 16  3  2 47  1  1  5 10  1  6 17  1  3  4  1 25</code></pre>
-<p>You can also embed plots, for example:</p>
-<p><img src="data:image/png;base64,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570HTtU0jInxCSg5O19D3yf0OqCffvcuuR96ee8BAWU6AkrezjuVX4d7oIOj8sED9kCZlICSv31Ed/W7cw70dIbz/I2vPuAcKOMTULJ1HLzUOYRw18DTA/sRTt2oz+83P/HqA67CMz4BJV/r09WjS0CPx/DHlG4ud2wehjHde+CQzdOIehiRgJKv0+1E+/p9Pt6JdLqv6HSf0WEPc324A+nuA6cx+ALK2ASUjK0vV9SPFfxf13OFbHvX3L8+fuC/XERidAJKxv6dpg453E/UXXrf9vs5mK/pzgPHHzAbExMQULJ2HMV0uBB0Grt0daXoMFT08+sP7CtsPlCmIKCUozcOFHIgoJRDQMmMgFIOASUzAko5BJTMCCjlEFAyI6CUQ0DJjIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBP1/kS1gLD4F+BoAAAAASUVORK5CYII=" title alt width="672" /></p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
+<p>Porém é interessante ter uma visão mais ampla, separando por estados, temos a seguinte distribuição:</p>
+<pre><code>## Centro-oeste     Nordeste        Norte      Sudeste          Sul 
+##           19           34            2           92           13 
+##         NA's 
+##            2</code></pre>
+<p>Como observado, mais da metade dos Profissionais trabalham no sudeste.</p>
+<pre><code>##                                                                  Desenvolvimento Java 
+##                                                                                     7 
+##                                                                  Analista de Sistemas 
+##                                                                                     6 
+##                                                                    Desenvolvedor Java 
+##                                                                                     6 
+##                                                                                       
+##                                                                                     3 
+##                                                    Analista de Sistemas/Desenvolvedor 
+##                                                                                     3 
+##                                                                         Desenvolvedor 
+##                                                                                     3 
+##                                                                   Analise de Sistemas 
+##                                                                                     2 
+##                                                                 Analista de NegÃ³cios 
+##                                                                                     2 
+##                                                                   Analista de Suporte 
+##                                                                                     2 
+##                                                                        Analista de TI 
+##                                                                                     2 
+##                                                                Analista de TI e Redes 
+##                                                                                     2 
+##                                                                  Analista Programador 
+##                                                                                     2 
+##                                                                 Arquiteto de sistemas 
+##                                                                                     2 
+##                                                                     Desenvolvedor Web 
+##                                                                                     2 
+##                                                  EstagiÃ¡rio Desenvolvedor Web - Java 
+##                                                                                     2 
+##                                                                                  Java 
+##                                                                                     2 
+##                                                                      Programador J2EE 
+##                                                                                     2 
+##                                              TÃ©cnico de Suporte (Redes e Servidores) 
+##                                                                                     2 
+##                                                      Trainee Desenvolvedor Web - Java 
+##                                                                                     2 
+##                                                       Administrador de Banco de Dados 
+##                                                                                     1 
+##                                                                Administrador de Dados 
+##                                                                                     1 
+##                                                                Administrador de Redes 
+##                                                                                     1 
+##                              AnÃ¡lise de Requisitos (EA); ProgramaÃ§Ã£o (Ruby + Flex) 
+##                                                                                     1 
+##                                                            AnÃ¡lise de Sistemas, Java 
+##                                                                                     1 
+##                                                AnÃ¡lista de Sistemas/VB 5, C#, Oracle 
+##                                                                                     1 
+##                                           Anal. Sist. / Prog / Adm BD / Anal. Suporte 
+##                                                                                     1 
+##                                                                           Analista BI 
+##                                                                                     1 
+##                           Analista de Desenvolvimento Pleno para Softwares Embarcados 
+##                                                                                     1 
+##                                           Analista de Geoprocessamento / JEE / Oracle 
+##                                                                                     1 
+##                                                                  Analista de NegÃ³cio 
+##                                                                                     1 
+##                         Analista de negocios/Analista de Suporte/Analista de sistemas 
+##                                                                                     1 
+##                                           Analista de Processos / Gerente de Projetos 
+##                                                                                     1 
+## Analista de Qualidade de Software/ CMMI, MPS.BR, EPF Composer, APF, Qualidade, Testes 
+##                                                                                     1 
+##                                                                      analista de rede 
+##                                                                                     1 
+##                                                     Analista de Redes / Desenvolvedor 
+##                                                                                     1 
+##                                                              Analista de Redes Senior 
+##                                                                                     1 
+##                                                     Analista de Sistema- test analyst 
+##                                                                                     1 
+##                                                             Analista de Sistema Pleno 
+##                                                                                     1 
+##                                                                  analista de sistemas 
+##                                                                                     1 
+##                                                Analista de Sistemas - Desenvolvimento 
+##                                                                                     1 
+##                                   Analista de sistemas - J2EE, Oracle, Forms, Reports 
+##                                                                                     1 
+##                                                           Analista de Sistemas - JAVA 
+##                                                                                     1 
+##                               Analista de Sistemas - Linux, HomologaÃ§Ã£o de Hardware 
+##                                                                                     1 
+##                            Analista de sistemas - Projeto e avaliaÃ§Ã£o de interfaces 
+##                                                                                     1 
+##                                            Analista de Sistemas / Desenvolvimento JEE 
+##                                                                                     1 
+##                                                           Analista de Sistemas / Java 
+##                                                                                     1 
+##                                                    Analista de Sistemas / Java / Flex 
+##                                                                                     1 
+##                                                Analista de Sistemas / Lider de equipe 
+##                                                                                     1 
+##                                    analista de sistemas / oracle forms reports e java 
+##                                                                                     1 
+##                                             Analista de Sistemas / Programador Delphi 
+##                                                                                     1 
+##                                               Analista de Sistemas / Projetos .NET/C# 
+##                                                                                     1 
+##                                                          Analista de Sistemas SÃªnior 
+##                                                                                     1 
+##                                                    Analista de sistemas/desenvolvedor 
+##                                                                                     1 
+##                                         Analista de sistemas/Desenvolvedor (JAVA WEB) 
+##                                                                                     1 
+##                                                Analista de sistemas/Desenvolvedor Web 
+##                                                                                     1 
+##                                                                   Analista de suporte 
+##                                                                                     1 
+##                                                             Analista de Suporte Pleno 
+##                                                                                     1 
+##                                                                    Analista de Testes 
+##                                                                                     1 
+##                                                        Analista de TI - Desenvolvedor 
+##                                                                                     1 
+##                                    Analista de TI (PostgreSQL + Aplicativos internos) 
+##                                                                                     1 
+##                                               Analista de TI / Desenvolvedor JAVA Web 
+##                                                                                     1 
+##                                                                  Analista de TI/Redes 
+##                                                                                     1 
+##                                                                    Analista Delphi/C# 
+##                                                                                     1 
+##                                                           Analista Desenvolvedor Java 
+##                                                                                     1 
+##                                                    Analista Desenvolvedor Java Senior 
+##                                                                                     1 
+##                                     Analista Desenvolvedor/Java/J2EE/SmallTalk/Oracle 
+##                                                                                     1 
+##                                                                           Analista PL 
+##                                                                                     1 
+##                                                                       Analista Pleno  
+##                                                                                     1 
+##                                                        Analista programador JAVA/J2EE 
+##                                                                                     1 
+##                                                                      Analista SI e TI 
+##                                                                                     1 
+##                                                                     Analista SI e TI. 
+##                                                                                     1 
+##                                 Analista SIG (Sistemas de InformaÃ§Ãµes GeogrÃ¡ficas) 
+##                                                                                     1 
+##                                                        Analista/ Gerente de Projetos  
+##                                                                                     1 
+##                                           Arquiteto de sistemas, Java/Oracle/J2EE/Web 
+##                                                                                     1 
+##                                                                       Arquiteto Java  
+##                                                                                     1 
+##                                                                        Banco de dados 
+##                                                                                     1 
+##                                                                                 COBOL 
+##                                                                                     1 
+##                                               Consultor Arquitetura de Infraestrutura 
+##                                                                                     1 
+##                                                                         Consultor BPM 
+##                                                                                     1 
+##                                                                     Consultor PNUD/GP 
+##                                                                                     1 
+##                                                                   Consultor PNUD/Java 
+##                                                                                     1 
+##                                                  Consultor, Analista, Programador etc 
+##                                                                                     1 
+##                                                      Coordenador de TI/Analista de TI 
+##                                                                                     1 
+##                                                           Desenvolvedor Java - Junior 
+##                                                                                     1 
+##                                          Desenvolvedor Java / Adm. de sistemas e rede 
+##                                                                                     1 
+##                                                             Desenvolvedor Java Junior 
+##                                                                                     1 
+##                                       Desenvolvedor Web (PHP, PostgreSQL) e Professor 
+##                                                                                     1 
+##                                                         Desenvolvedor Web J2EE Junior 
+##                                                                                     1 
+##                                                                Desenvolverdoer Delphi 
+##                                                                                     1 
+##                                                      Desenvolviment de Softwares - JR 
+##                                                                                     1 
+##                                                                   Desenvolvimento PHP 
+##                                                                                     1 
+##                                                                   Design de interface 
+##                                                                                     1 
+##                                                            DocumentaÃ§Ã£o / Pesquisa  
+##                                                                                     1 
+##                                                          Engenheiro de Semicondutores 
+##                                                                                     1 
+##                                                                Engenheiro de software 
+##                                                                                     1 
+##                                                                Engenheiro de Software 
+##                                                                                     1 
+##                                                                       GerÃªncia em TI 
+##                                                                                     1 
+##                                                             Gerenciamento de Projetos 
+##                                                                                     1 
+##                                                                   Gerente de projetos 
+##                                                                                     1 
+##                                                                               (Other) 
+##                                                                                    28</code></pre>
+<p>Rapidamente podemos perceber que os dados são inconsistentes e ate alguns absurdos(como por exemplo java sendo considerado uma profissão), por isso essa parte é bem inconclusiva.</p>
+<p>Em relação a pós graduação ou certificação, o número é bem parecido, 80 possuem, 82 não possuem.</p>
+<pre><code>##    Mode   FALSE    TRUE    NA's 
+## logical      82      80       0</code></pre>
+<p>Abaixo podemos identificar também que a grande maioria trabalha para a iniciativa privada.</p>
+<pre><code>## 
+##                            Concursado Iniciativa Privada 
+##                  8                 36                118</code></pre>
+<p>Destaque para 8 deles que não informaram este dado.</p>
+<p>Por horas trabalhadas, vemos que não se trabalha mais de 9h diárias, e a grande maioria trabalha 8 horas diárias.</p>
+<pre><code>## 
+##    4    6    7    8  8.4 8.48  8.8    9 
+##    3    5   11  126    1    1    7    8</code></pre>
+<p><strong>3. Distribuição de Salários</strong></p>
+<p>Em termos gerais, o salário é distribuido da seguinte maneira:</p>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     500    2281    3583    4233    5332   42120</code></pre>
+<p>Com média salarial de R$ 4233 e o salário mediano R$ 3583. Há uma boa explicação para isso, como podemos observar no boxplot abaixo.</p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABUAAAAPACAMAAADDuCPrAAAASFBMVEX9/v0AAAAAADkAAGUAOY8AZrU5AAA5j9plAABltf2POQCP29qP2/21ZgC1jzm1/rW1/v3ajzna/v39tWX924/9/rX9/tr9/v2/YI7JAAAAGHRSTlP//////////////////////////////wDNEy7qAAAACXBIWXMAAB2HAAAdhwGP5fFlAAAXQUlEQVR4nO3d7VLb2LaG0e18dTo77NM0Sbj/Oz0GkrSNSNB6vYTmpMf4B1VxpaTlp7SQPP2fWwAi/9n7PwDQlYAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUICSgACEBBQgJKEBIQAFCAgoQElCAkIAChAQUIFQ7oAeAaaYnqnRA9z7awOsyu1HFA7r3/wB4PQQUICSgACEBBQgJKEBIQAFC/QJ69fP5gffj/1hAgXmaBfT60TNYow0VUGCeVgH98mHxFOvbv4ZeQUCBeToF9Nun82J+/Xj8+d3fIy8hoMA8nQJ6s8jlXVL/HHkJAQXm6RTQq+WG/XgROvRnUAEF5mkU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m89DryCgwDytAno6iumBYSLAfpoF9NY4O6CMfgG9iIAC8wgoQEhAAUICChASUICQgAKEBBQg9K8LKMA8sxsloMC/xuxGlQ4oQGUCChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUICQgAKEBBQgJKAAIQEFCAkoQEhAAUICChASUIDQ/wMBTquC93aCnwAAAABJRU5ErkJggg==" title alt width="672" /> Temos quatro outliers, e um deles bem extravagante, ganhando acima de R$40000, como a média é uma medida sensível a seus valores, ela sofre um aumento graças a esses outliers.</p>
+<p>Em termos gerais, o menor salário é R$ 500, o maior 42120. Disconsiderando os outliers é uma distribuição bem próxima da esperada.</p>
+<p><strong>4. Análise Sobre a Distribuição dos Salários</strong></p>
+<p>Em partes sim, é uma distribuição similar que eu imaginava, o fato surpreendente é o do maior salário estar em Campina Grande, assim como ter tão poucas pessoas que ganham salários superiores a R$ 10000. Porém a maior faixa de salários é próximo do que eu imaginava.</p>
+<p><strong>5. Média e Mediana de Salários</strong></p>
+<p>A média</p>
+<pre><code>## Centro-oeste     Nordeste      Sudeste          Sul        Norte 
+##     5620.474     4565.706     3962.227     3657.538     2552.500</code></pre>
+<p>A média da região nordeste é bem alta, mas isso se deve ao outlier com o salário mais alto.</p>
+<pre><code>## Centro-oeste      Sudeste          Sul     Nordeste        Norte 
+##      5000.00      3582.95      3500.00      2900.00      2552.50</code></pre>
+<p>Analisando a mediana, como visto acima, temos uma informação mais real de um salário mediano de cada região, onde os outliers não influenciam tanto no valor.</p>
+<p>Para salvar os dados: <code>dados = sort(tapply(salarios.ti.regioes$Salario.Bruto, salarios.ti.regioes$Regiao, median), decreasing=TRUE)</code> <code>write.csv(dados, 'c:/Documentos/salario_por_regiao.csv')</code></p>
+<p><strong>6. Dicas Para a Busca do Melhor Salário</strong></p>
+<p>Podemos olhar por alguns atributos, por estado por exemplo:</p>
+<pre><code>##     RJ     CE     DF     PJ     SC     GO     SP     PA     PB     RS 
+## 5250.0 5200.0 5100.0 4500.0 4400.0 4384.5 4300.0 4000.0 3900.0 3900.0 
+##     PR     BA     MT     MG     AL            ES     PE     SE     RO 
+## 3250.0 3000.0 2890.0 2508.0 2250.0 2125.0 2100.0 2035.0 1150.0 1105.0</code></pre>
+<p>Se formos fazer uma escolhar por estado, Rio de Janeiro, Ceará e Distrito Federal seriam as melhores opções.</p>
+<p>Por região, como visto no tópico anterior</p>
+<pre><code>## Centro-oeste      Sudeste          Sul     Nordeste        Norte 
+##      5000.00      3582.95      3500.00      2900.00      2552.50</code></pre>
+<p>Nesse ponto o centro-oeste é disparado a melhor opção, porém lá possui o maior custo de vida do país e isso deve ser levado em consideração.</p>
+<p>Ao fazer a análise por horas trabalhadas, podemos ver que não é um fator tão determinante assim para o salário.</p>
+<pre><code>##    7    9    8  8.8 8.48  8.4    6    4 
+## 5495 4650 3500 3500 3300 2900 1500 1100</code></pre>
+<p>Quando observamos certificação(ou pós graduação), vemos que este atributo tem uma relaçao muito grande com o salário, pessoas que o possuem, no geral ganham mais.</p>
+<pre><code>##  TRUE FALSE 
+##  4600  2850</code></pre>
+<p>Já por tempo de empresa é facilmente perceptível que quanto este for maior, maior é o salário.</p>
+<pre><code>##      12       3       9     3.5    2.83       4    0.83     2.5    0.25 
+## 15000.0  6000.0  6000.0  5800.0  5700.0  5200.0  5125.0  5062.5  5000.0 
+##    0.66     1.3    0.58    1.66       5       7       6       1    1.58 
+##  4450.0  4390.0  4300.0  4100.0  3990.0  3850.0  3665.9  3500.0  3500.0 
+##     0.5     5.5    0.16    0.33    1.91    2.66    1.16    0.08       2 
+##  3150.0  3100.0  3000.0  3000.0  2950.0  2890.0  2800.0  2504.0  2500.0 
+##    1.41    2.16    0.75    0.41       0 
+##  2400.0  2100.0  2050.0  1887.5   800.0</code></pre>
+<p>No fim, as dicas que podemos dar, caso um profissional da área pense no maior salário é que procurem a região centro-oeste, possuam pós graduação ou certificação e além disso, passem mais tempo na empresa, as chances de crescer nela e receber mais são claras.</p>
 
 
 </div>

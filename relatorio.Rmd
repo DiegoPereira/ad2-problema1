@@ -5,26 +5,129 @@ date: "Wednesday, October 15, 2014"
 output: html_document
 ---
 
-  Este Ã© um relatÃ³rio referente a primeira atividade da disciplina de AnÃ¡lise de Dados II, da Universidade Federal de Campina Grande, ministrada pelo professor Nazareno Andrade.
+  Este é um relatório referente a primeira atividade da disciplina de Análise de Dados II, da Universidade Federal de Campina Grande, ministrada pelo professor Nazareno Andrade.
 
-  O intuito Geral dessa anÃ¡lise Ã© termos uma ideia do perfil do profissional de TI no Brasil, em relaÃ§Ã£o de algumas variavÃ©is que dispomos.
+  O intuito Geral dessa análise é termos uma ideia do perfil do profissional de TI no Brasil, em relação de algumas variáveis que dispomos.
   
-  Os dados estÃ£o disponÃ­veis aqui.
+  Os dados estão disponí­veis [aqui](https://sites.google.com/a/computacao.ufcg.edu.br/analise-de-dados-1/problema/salarios-ti-regioes.csv)
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+**1. Visão Geral de Hans Rosling sobre a divisão socioecônomica entre primeiro mundo e terceiro mundo.**
 
+A pergunta que ele se fez inicialmente foi se podíamos dividir o mundo em mundo ocidental e em terceiro mundo. Onde o primeiro tinha vida longa e família pequena, e o segundo famílias grandes e pouca expectativa de vida. A primeira observação mostra que na medida que os países investem mais em saúde a expectativa de vida o comportamento de famílias pequenas e boa expectativa de vida se assemelha ao dos países ricos do ocidente.
+Daí vem a dúvida do que teria ocasionado isso, e ele começa a perguntar ao dados o motivo disso, primeira informação foi a distribuição de renda. O fato interessante é o crescimento da Ásia e sua gradativa saída do grupo dos mais pobres. Depois o gancho foi relacionar a taxa de mortalidade infantil com o PIB per capita de cada região e podemos observar que mesmo dentro das regiões há grandes diferenças econômicas e socioculturais. Uma boa constatação é que segundo os dados um país saudável se desenvolve mais rapidamente do que um rico.
+No geral não tive dúvidas sobre o vídeo.
+
+**2. Panorama Geral dos Profissionais de TI**
+
+Os dados são constítuidos dos campos: Cidade, UF, salario bruto, horas diarias, tempo de empresa, experiência profissional, iniciativa, cargo, formacao, pos graduacao ou certificacao e regiao.
+
+
+Abaixo podemos encontrar a distribuição de salários em função dos estados, podemos observar logo de imediato que Minas Gerais possui o maior número de empregados na área.
 ```{r, echo=FALSE}
-summary(cars)
 salarios <- read.csv("C:/Users/diego/Desktop/salarios-ti-regioes.csv")
 summary(salarios$UF)
+salarios.ti.regioes <- salarios
 ```
 
-You can also embed plots, for example:
+Porém é interessante ter uma visão mais ampla, separando por estados, temos a seguinte distribuição:
 
 ```{r, echo=FALSE}
-plot(cars)
+summary(salarios$Regiao)
+````
+
+Como observado, mais da metade dos Profissionais trabalham no sudeste.
+
+```{r, echo=FALSE}
+summary(salarios$Cargo)
+````
+
+Rapidamente podemos perceber que os dados são inconsistentes e ate alguns absurdos(como por exemplo java sendo considerado uma profissão), por isso essa parte é bem inconclusiva.
+
+
+Em relação a pós graduação ou certificação, o número é bem parecido, 80 possuem, 82 não possuem.
+```{r, echo=FALSE} 
+summary(salarios$Pos.Graduacao.ou.Certificacao)
+````
+
+
+
+Abaixo podemos identificar também que a grande maioria trabalha para a iniciativa privada.
+```{r, echo=FALSE}
+table(salarios.ti.regioes$Iniciativa.Privada.ou.Concursado)
+```
+Destaque para 8 deles que não informaram este dado.
+
+Por horas trabalhadas, vemos que não se trabalha mais de 9h diárias, e a grande maioria trabalha 8 horas diárias.
+```{r, echo=FALSE}
+table(salarios.ti.regioes$Horas.Diarias)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+**3. Distribuição de Salários**
+
+Em termos gerais, o salário é distribuido da seguinte maneira:
+```{r, echo=FALSE}
+summary(salarios$Salario.Bruto)
+````
+Com média salarial de R$ 4233 e o salário mediano R$ 3583. Há uma boa explicação para isso, como podemos observar no boxplot abaixo.
+
+```{r, echo=FALSE}
+boxplot(salarios.ti.regioes$Salario.Bruto)
+```
+Temos quatro outliers, e um deles bem extravagante, ganhando acima de R$40000, como a média é uma medida sensível a seus valores, ela sofre um aumento graças a esses outliers.
+
+Em termos gerais, o menor salário é R$ 500, o maior 42120. Disconsiderando os outliers é uma distribuição bem próxima da esperada.
+
+**4. Análise Sobre a Distribuição dos Salários**
+
+Em partes sim, é uma distribuição similar que eu imaginava, o fato surpreendente é o do maior salário estar em Campina Grande, assim como ter tão poucas pessoas que ganham salários superiores a R$ 10000. Porém a maior faixa de salários é próximo do que eu imaginava.
+
+**5. Média e Mediana de Salários**
+
+A média 
+```{r, echo=FALSE}
+sort(tapply(salarios.ti.regioes$Salario.Bruto, salarios.ti.regioes$Regiao, mean), decreasing=TRUE)
+```
+A média da região nordeste é bem alta, mas isso se deve ao outlier com o salário mais alto.
+
+```{r, echo=FALSE}
+sort(tapply(salarios.ti.regioes$Salario.Bruto, salarios.ti.regioes$Regiao, median), decreasing=TRUE)
+```
+Analisando a mediana, como visto acima, temos uma informação mais real de um salário mediano de cada região, onde os outliers não influenciam tanto no valor.
+
+Para salvar os dados:
+`dados = sort(tapply(salarios.ti.regioes$Salario.Bruto, salarios.ti.regioes$Regiao, median), decreasing=TRUE)`
+`write.csv(dados, 'c:/Documentos/salario_por_regiao.csv')`
+
+**6. Dicas Para a Busca do Melhor Salário**
+
+Podemos olhar por alguns atributos, por estado por exemplo:
+```{r, echo=FALSE}
+sort(tapply(salarios.ti.regioes$Salario.Bruto, salarios.ti.regioes$UF, median), decreasing=TRUE)
+```
+Se formos fazer uma escolhar por estado, Rio de Janeiro, Ceará e Distrito Federal seriam as melhores opções.
+
+Por região, como visto no tópico anterior
+```{r, echo=FALSE}
+sort(tapply(salarios.ti.regioes$Salario.Bruto, salarios.ti.regioes$Regiao, median), decreasing=TRUE)
+```
+Nesse ponto o centro-oeste é disparado a melhor opção, porém lá possui o maior custo de vida do país e isso deve ser levado em consideração.
+
+Ao fazer a análise por horas trabalhadas, podemos ver que não é um fator tão determinante assim para o salário.
+```{r, echo=FALSE}
+sort(tapply(salarios.ti.regioes$Salario.Bruto, salarios.ti.regioes$Horas.Diarias, median), decreasing=TRUE)
+```
+
+
+Quando observamos certificação(ou pós graduação), vemos que este atributo tem uma relaçao muito grande com o salário, pessoas que o possuem, no geral ganham mais.
+```{r, echo=FALSE}
+sort(tapply(salarios.ti.regioes$Salario.Bruto, salarios.ti.regioes$Pos.Graduacao.ou.Certificacao, median), decreasing=TRUE)
+```
+
+Já por tempo de empresa é facilmente perceptível que quanto este for maior, maior é o salário.
+```{r, echo=FALSE}
+sort(tapply(salarios.ti.regioes$Salario.Bruto, salarios.ti.regioes$Tempo.de.Empresa, median), decreasing=TRUE)
+```
+
+No fim, as dicas que podemos dar, caso um profissional da área pense no maior salário é que procurem a região centro-oeste, possuam pós graduação ou certificação e além disso, passem mais tempo na empresa, as chances de crescer nela e receber mais são claras.
