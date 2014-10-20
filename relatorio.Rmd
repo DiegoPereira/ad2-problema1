@@ -40,11 +40,12 @@ summary(salarios$Regiao)
 
 Como observado, mais da metade dos Profissionais trabalham no sudeste.
 
+Podemos também listar por cargo, aqui listaremos os 3 principais.
 ```{r, echo=FALSE}
-summary(salarios$Cargo)
+summary(salarios$Cargo)[1:3]
 ````
 
-Rapidamente podemos perceber que os dados são inconsistentes e ate alguns absurdos(como por exemplo java sendo considerado uma profissão), por isso essa parte é bem inconclusiva.
+Rapidamente podemos perceber que os dados são inconsistentes e até alguns absurdos(como por exemplo java sendo considerado uma profissão), por isso essa parte é bem inconclusiva.
 
 
 Em relação a pós graduação ou certificação, o número é bem parecido, 80 possuem, 82 não possuem.
